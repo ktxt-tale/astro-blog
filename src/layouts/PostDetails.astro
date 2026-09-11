@@ -30,12 +30,11 @@ const {
 const { Content } = await post.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const fallbackOgImage = `posts/${slugifyStr(title)}.png`;
+const relativeOgImage = (ogImageUrl ?? fallbackOgImage).replace(/^\/+/, "");
 const ogUrl = /^https?:\/\//.test(ogImageUrl ?? "")
   ? ogImageUrl
-  : new URL(
-      `${base}${(ogImageUrl ?? `posts/${slugifyStr(title)}.png`).replace(/^\/+/, "")}`,
-      Astro.url.origin
-    ).href;
+  : new URL(`${base}${relativeOgImage}`, Astro.url.origin).href;
 
 const layoutProps = {
   title: `${title} | ${SITE.title}`,

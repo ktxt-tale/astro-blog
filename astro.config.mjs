@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://ktxt-tale.github.io',
-  base: '/astro-blog',
+  base: '/astro-blog/',
   integrations: [
     tailwind({
       applyBaseStyles: false,

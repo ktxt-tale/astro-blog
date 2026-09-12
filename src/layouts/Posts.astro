@@ -1,11 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/Layout.astro";
-import Main from "@layouts/Main.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Pagination from "@components/Pagination.astro";
-import Card from "@components/Card";
 import { SITE } from "@config";
 
 export interface Props {
@@ -18,24 +16,39 @@ const { currentPage, totalPages, paginatedPosts } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
+<Layout title={`Writing | ${SITE.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
-    <ul>
-      {
-        paginatedPosts.map(({ data, slug }) => (
-          <Card href={`${base}posts/${slug}/`} frontmatter={data} />
-        ))
-      }
-    </ul>
-  </Main>
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 pb-20 pt-14 sm:pt-20">
+    <div class="mb-10 max-w-2xl">
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-skin-accent">Writing</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-6xl">Notes on products, design, and building.</h1>
+      <p class="mt-5 text-lg leading-8 opacity-60">Longer thoughts, technical notes, experiments, and lessons from making software.</p>
+    </div>
 
-  <Pagination
-    {currentPage}
-    {totalPages}
-    prevUrl={`${base}posts${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-    nextUrl={`${base}posts/${currentPage + 1}/`}
-  />
+    <div class="divide-y divide-skin-line border-y border-skin-line">
+      {paginatedPosts.map(({ data, slug }) => (
+        <a href={`${base}posts/${slug}/`} class="group grid gap-4 py-7 transition hover:text-skin-accent sm:grid-cols-[150px_1fr_auto] sm:items-start sm:gap-8">
+          <div class="font-mono text-xs uppercase tracking-[0.1em] text-skin-base opacity-40">
+            {data.pubDatetime.toLocaleDateString("en", { year: "numeric", month: "short", day: "numeric" })}
+          </div>
+          <div>
+            <h2 class="text-xl font-semibold tracking-tight sm:text-2xl">{data.title}</h2>
+            <p class="mt-2 max-w-2xl leading-7 text-skin-base opacity-55">{data.description}</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {data.tags.slice(0, 3).map(tag => <span class="rounded-full border border-skin-line px-2.5 py-1 text-[11px] text-skin-base opacity-55">{tag}</span>)}
+            </div>
+          </div>
+          <span class="text-xl opacity-30 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">↗</span>
+        </a>
+      ))}
+    </div>
 
+    <Pagination
+      {currentPage}
+      {totalPages}
+      prevUrl={`${base}posts${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+      nextUrl={`${base}posts/${currentPage + 1}/`}
+    />
+  </main>
   <Footer noMarginTop={totalPages > 1} />
 </Layout>

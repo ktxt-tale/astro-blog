@@ -3,41 +3,22 @@ import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title={`404 Not Found | ${SITE.title}`}>
+<Layout title={`404 | ${SITE.title}`}>
   <Header />
-
-  <main id="main-content">
-    <div class="not-found-wrapper">
-      <h1 aria-label="404 Not Found">404</h1>
-      <span aria-hidden="true">¯\_(ツ)_/¯</span>
-      <p>Page Not Found</p>
-      <LinkButton
-        href={base}
-        className="my-6 text-lg underline decoration-dashed underline-offset-8"
-      >
-        Go back home
-      </LinkButton>
+  <main id="main-content" class="mx-auto flex w-full max-w-6xl flex-1 items-center px-4 py-20">
+    <div class="max-w-2xl">
+      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-skin-accent">404 / Lost route</p>
+      <h1 class="mt-4 text-5xl font-semibold tracking-tight sm:text-7xl">This page didn’t ship.</h1>
+      <p class="mt-5 max-w-xl text-lg leading-8 opacity-60">The link may be outdated, moved, or still sitting in the backlog.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={base} class="rounded-xl bg-skin-inverted px-4 py-2.5 text-sm font-medium text-skin-inverted">Back home</a>
+        <a href={`${base}projects/`} class="rounded-xl border border-skin-line px-4 py-2.5 text-sm font-medium hover:bg-skin-card">Browse projects</a>
+        <a href={`${base}posts/`} class="rounded-xl border border-skin-line px-4 py-2.5 text-sm font-medium hover:bg-skin-card">Read writing</a>
+      </div>
     </div>
   </main>
-
   <Footer />
 </Layout>
-
-<style>
-  #main-content {
-    @apply mx-auto flex max-w-3xl flex-1 items-center justify-center;
-  }
-  .not-found-wrapper {
-    @apply mb-14 flex flex-col items-center justify-center;
-  }
-  .not-found-wrapper h1 {
-    @apply text-9xl font-bold text-skin-accent;
-  }
-  .not-found-wrapper p {
-    @apply mt-4 text-2xl sm:text-3xl;
-  }
-</style>

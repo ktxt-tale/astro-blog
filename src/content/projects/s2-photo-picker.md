@@ -14,9 +14,10 @@ draft: false
 cover: /astro-blog/assets/projects/s2-photo-picker/cover.svg
 demoUrl: https://s2.io.vn/
 repoUrl: ""
+ecosystem: S2 Photo Picker
+relatedProjects:
+  - s2-photo-picker-chrome-extension
 ---
-
-![S2 Photo Picker](/astro-blog/assets/projects/s2-photo-picker/cover.svg)
 
 S2 Photo Picker là một sản phẩm tập trung vào một đoạn workflow rất cụ thể nhưng dễ gây mất thời gian trong công việc nhiếp ảnh: **khách chọn ảnh và thợ ảnh lấy đúng các file đã chọn để tiếp tục hậu kỳ**.
 

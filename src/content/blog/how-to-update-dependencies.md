@@ -13,7 +13,7 @@ description: How to update project dependencies and AstroPaper template.
 
 Updating the dependencies of a project can be tedious. However, neglecting to update project dependencies is not a good idea either 😬. In this post, I will share how I usually update my projects, focusing on AstroPaper as an example. Nonetheless, these steps can be applied to other js/node projects as well.
 
-![Forrest Gump Fake Quote](/assets/forrest-gump-quote.webp)
+![Forrest Gump Fake Quote](/astro-blog/assets/forrest-gump-quote.webp)
 
 ## Table of contents
 
@@ -101,7 +101,7 @@ After running the above command, you’re likely to encounter conflicts in your 
 
 After resolving the conflicts, test your blog thoroughly to ensure everything is working as expected. Check your articles, components, and any customizations you made.
 
-Once you're satisfied with the result, it's time to merge the update branch into your main branch (only if you are updating the template in another branch). Congratulations! You've successfully updated your template to the latest version. Your blog is now up-to-date and ready to shine! 🎉
+Once you're satisfied with the result, it's time to merge the update branch into your main branch (only if you are updating the template in another branch). Congratulations! You've successfully updated the template to the latest version. Your blog is now up-to-date and ready to shine! 🎉
 
 ## Conclusion
 

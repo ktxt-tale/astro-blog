@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="1480" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF2FF"/>
+      <stop offset="0.52" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#ECFDF5"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="28" stdDeviation="38" flood-color="#0F172A" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" rx="48" fill="url(#bg)"/>
+  <circle cx="1390" cy="120" r="230" fill="#C7D2FE" opacity="0.45"/>
+  <circle cx="145" cy="805" r="250" fill="#D1FAE5" opacity="0.6"/>
+
+  <g transform="translate(90 88)">
+    <rect width="168" height="42" rx="21" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="24" cy="21" r="6" fill="#22C55E"/>
+    <text x="42" y="27" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">CHROME EXTENSION</text>
+  </g>
+
+  <text x="92" y="204" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="74" font-weight="800" letter-spacing="-2">S2 Photo Picker</text>
+  <text x="92" y="270" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="500">Tạo trang chọn ảnh ngay từ Google Drive — chỉ với một nút.</text>
+
+  <g filter="url(#shadow)" transform="translate(92 350)">
+    <rect width="930" height="420" rx="30" fill="#FFFFFF"/>
+    <rect width="930" height="58" rx="30" fill="#F8FAFC"/>
+    <circle cx="32" cy="29" r="7" fill="#FCA5A5"/>
+    <circle cx="56" cy="29" r="7" fill="#FCD34D"/>
+    <circle cx="80" cy="29" r="7" fill="#86EFAC"/>
+    <rect x="125" y="17" width="650" height="24" rx="12" fill="#E2E8F0"/>
+    <text x="148" y="35" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="15">drive.google.com/drive/folders/...</text>
+
+    <text x="44" y="126" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="23" font-weight="700">Album cưới / 1.248 ảnh</text>
+    <text x="44" y="160" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="16">My Drive · Bạn là chủ sở hữu thư mục</text>
+
+    <rect x="44" y="202" width="842" height="110" rx="20" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <rect x="70" y="229" width="62" height="56" rx="12" fill="#DBEAFE"/>
+    <path d="M86 246h32v23H86z" fill="#60A5FA" opacity=".75"/>
+    <text x="154" y="251" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Thư mục đã sẵn sàng</text>
+    <text x="154" y="277" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="15">Extension tự kiểm tra quyền chia sẻ trước khi tạo trang.</text>
+
+    <rect x="662" y="335" width="224" height="54" rx="16" fill="url(#accent)"/>
+    <text x="694" y="369" fill="white" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">Tạo trang S2 ↗</text>
+  </g>
+
+  <g transform="translate(1080 360)">
+    <rect width="424" height="306" rx="30" fill="#0F172A"/>
+    <text x="34" y="55" fill="#94A3B8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">one_click_workflow</text>
+    <text x="34" y="105" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Drive → S2</text>
+    <text x="34" y="148" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="18">Bật chia sẻ</text>
+    <text x="34" y="181" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="18">Tạo album</text>
+    <text x="34" y="214" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="18">Nhận link</text>
+    <rect x="34" y="244" width="188" height="38" rx="19" fill="#312E81"/>
+    <circle cx="56" cy="263" r="5" fill="#A5B4FC"/>
+    <text x="70" y="269" fill="#E0E7FF" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">Không cần OAuth</text>
+  </g>
+
+  <text x="1090" y="742" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="16">Product note · KTXT</text>
+  <text x="1090" y="775" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">A tiny automation for a repeated workflow.</text>
+</svg>

@@ -53,20 +53,27 @@ const featuredProjects = projects.slice(0, 4);
       <div class="project-grid">
         {featuredProjects.map(({ slug, data }, index) => (
           <a href={`${base}projects/${slug}/`} class="project-card group">
-            <div class="project-card-top">
-              <span class="project-index">0{index + 1}</span>
-              <span class="project-status">{data.status}</span>
-            </div>
-            <div class="project-main">
-              <p class="project-year">{data.year}{data.role ? ` · ${data.role}` : ""}</p>
-              <h3>{data.title}</h3>
-              <p>{data.summary}</p>
-            </div>
-            <div class="project-footer">
-              <div class="stack-list">
-                {data.stack.slice(0, 4).map(item => <span>{item}</span>)}
+            {data.cover && (
+              <div class="project-cover">
+                <img src={data.cover} alt="" loading="lazy" />
               </div>
-              <span class="project-arrow">↗</span>
+            )}
+            <div class="project-content">
+              <div class="project-card-top">
+                <span class="project-index">0{index + 1}</span>
+                <span class="project-status">{data.status}</span>
+              </div>
+              <div class="project-main">
+                <p class="project-year">{data.year}{data.role ? ` · ${data.role}` : ""}</p>
+                <h3>{data.title}</h3>
+                <p>{data.summary}</p>
+              </div>
+              <div class="project-footer">
+                <div class="stack-list">
+                  {data.stack.slice(0, 4).map(item => <span>{item}</span>)}
+                </div>
+                <span class="project-arrow">↗</span>
+              </div>
             </div>
           </a>
         ))}
@@ -226,7 +233,19 @@ const featuredProjects = projects.slice(0, 4);
   }
 
   .project-card {
-    @apply flex min-h-[310px] flex-col rounded-3xl border border-skin-line bg-skin-card/25 p-6 transition hover:-translate-y-1 hover:border-skin-accent hover:bg-skin-card/50 sm:p-7;
+    @apply overflow-hidden rounded-3xl border border-skin-line bg-skin-card/25 transition hover:-translate-y-1 hover:border-skin-accent hover:bg-skin-card/50;
+  }
+
+  .project-cover {
+    @apply aspect-[1.9/1] overflow-hidden border-b border-skin-line bg-skin-card;
+  }
+
+  .project-cover img {
+    @apply h-full w-full object-cover transition duration-300 group-hover:scale-[1.015];
+  }
+
+  .project-content {
+    @apply flex min-h-[285px] flex-col p-6 sm:p-7;
   }
 
   .project-card-top,
@@ -241,7 +260,7 @@ const featuredProjects = projects.slice(0, 4);
   }
 
   .project-main {
-    @apply my-auto py-10;
+    @apply my-auto py-8;
   }
 
   .project-main h3 {

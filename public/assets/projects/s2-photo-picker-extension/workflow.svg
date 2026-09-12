@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#818CF8"/>
+      <stop offset="1" stop-color="#C084FC"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" rx="48" fill="url(#bg)"/>
+  <text x="90" y="112" fill="#A5B4FC" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="700" letter-spacing="2">S2 PHOTO PICKER EXTENSION</text>
+  <text x="90" y="180" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="800" letter-spacing="-1">Từ 5 thao tác thủ công xuống còn 1 nút.</text>
+  <text x="90" y="226" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="22">Một lớp automation nhỏ nằm ngay trong workflow Google Drive của photographer.</text>
+
+  <g transform="translate(90 340)">
+    <rect width="260" height="250" rx="28" fill="#172033" stroke="#334155"/>
+    <circle cx="44" cy="46" r="20" fill="#1E3A8A"/>
+    <text x="38" y="53" fill="#BFDBFE" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">1</text>
+    <text x="34" y="108" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">Mở thư mục Drive</text>
+    <text x="34" y="150" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="17">Album ảnh đã nằm sẵn</text>
+    <text x="34" y="177" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="17">trong My Drive.</text>
+    <text x="34" y="218" fill="#64748B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">drive.google.com</text>
+  </g>
+
+  <path d="M380 465H440" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+  <path d="M426 450L442 465L426 480" stroke="#64748B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(470 340)">
+    <rect width="300" height="250" rx="28" fill="#1E1B4B" stroke="#4F46E5"/>
+    <circle cx="44" cy="46" r="20" fill="url(#accent)"/>
+    <text x="38" y="53" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">2</text>
+    <text x="34" y="108" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">Bấm “Tạo trang S2”</text>
+    <text x="34" y="150" fill="#C7D2FE" font-family="Inter, Arial, sans-serif" font-size="17">Extension kiểm tra folder,</text>
+    <text x="34" y="177" fill="#C7D2FE" font-family="Inter, Arial, sans-serif" font-size="17">bật chia sẻ nếu cần.</text>
+    <rect x="34" y="204" width="178" height="34" rx="17" fill="#312E81"/>
+    <text x="52" y="226" fill="#E0E7FF" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700">Safety check trước</text>
+  </g>
+
+  <path d="M800 465H860" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+  <path d="M846 450L862 465L846 480" stroke="#64748B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(890 340)">
+    <rect width="260" height="250" rx="28" fill="#172033" stroke="#334155"/>
+    <circle cx="44" cy="46" r="20" fill="#14532D"/>
+    <text x="38" y="53" fill="#BBF7D0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">3</text>
+    <text x="34" y="108" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">S2 tạo album</text>
+    <text x="34" y="150" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="17">Không cần copy link,</text>
+    <text x="34" y="177" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="17">không cần mở tab mới.</text>
+    <text x="34" y="218" fill="#86EFAC" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">s2.io.vn/albums/...</text>
+  </g>
+
+  <path d="M1180 465H1240" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+  <path d="M1226 450L1242 465L1226 480" stroke="#64748B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(1270 340)">
+    <rect width="240" height="250" rx="28" fill="#172033" stroke="#334155"/>
+    <circle cx="44" cy="46" r="20" fill="#581C87"/>
+    <text x="38" y="53" fill="#E9D5FF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">4</text>
+    <text x="34" y="108" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">Copy &amp; gửi khách</text>
+    <text x="34" y="150" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="17">Link xuất hiện ngay</text>
+    <text x="34" y="177" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="17">trong tab Drive.</text>
+    <rect x="34" y="204" width="142" height="34" rx="17" fill="#3B0764"/>
+    <text x="52" y="226" fill="#F3E8FF" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700">Sao chép link</text>
+  </g>
+
+  <g transform="translate(90 688)">
+    <rect width="1420" height="102" rx="24" fill="#111827" stroke="#334155"/>
+    <text x="32" y="41" fill="#64748B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">DESIGN DECISION</text>
+    <text x="32" y="72" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="18">Không yêu cầu Google OAuth / Drive API — automation diễn ra trên chính tab Drive đang mở.</text>
+    <rect x="1178" y="28" width="210" height="46" rx="23" fill="#1E1B4B"/>
+    <text x="1210" y="57" fill="#C7D2FE" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800">small friction → removed</text>
+  </g>
+</svg>

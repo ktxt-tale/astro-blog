@@ -50,7 +50,7 @@
   }
 
   .prose {
-    @apply prose-headings:tracking-tight prose-headings:text-skin-base prose-p:text-skin-base prose-a:text-skin-accent prose-a:decoration-skin-accent prose-a:underline-offset-4 prose-strong:text-skin-base prose-blockquote:border-skin-accent prose-blockquote:text-skin-base prose-li:text-skin-base prose-li:marker:text-skin-accent prose-code:rounded prose-code:bg-skin-card prose-code:px-1 prose-code:py-0.5 prose-code:text-skin-base prose-code:before:content-none prose-code:after:content-none prose-hr:border-skin-line;
+    @apply prose-headings:tracking-tight prose-headings:text-skin-base prose-p:text-skin-base prose-a:text-skin-accent prose-a:underline-offset-4 prose-strong:text-skin-base prose-blockquote:border-skin-accent prose-blockquote:text-skin-base prose-li:text-skin-base prose-li:marker:text-skin-accent prose-code:rounded prose-code:bg-skin-card prose-code:px-1 prose-code:py-0.5 prose-code:text-skin-base prose-code:before:content-none prose-code:after:content-none prose-hr:border-skin-line;
   }
 
   .prose img {

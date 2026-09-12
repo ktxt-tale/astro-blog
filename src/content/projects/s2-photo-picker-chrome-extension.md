@@ -14,9 +14,10 @@ draft: false
 cover: /astro-blog/assets/projects/s2-photo-picker-extension/cover.svg
 demoUrl: https://chromewebstore.google.com/detail/s2-photo-picker-%E2%80%93-t%E1%BA%A1o-tra/pdaohlfbacmnmlnbmakkaiaimpdocckh
 repoUrl: ""
+ecosystem: S2 Photo Picker
+relatedProjects:
+  - s2-photo-picker
 ---
-
-![S2 Photo Picker Chrome Extension](/astro-blog/assets/projects/s2-photo-picker-extension/cover.svg)
 
 S2 Photo Picker Chrome Extension là một lớp automation nhỏ đặt đúng vào điểm gây ma sát nhiều nhất của workflow S2: **từ thư mục Google Drive đến một trang chọn ảnh sẵn sàng gửi cho khách**.
 

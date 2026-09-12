@@ -15,7 +15,6 @@ export interface Props {
 
 const { post } = Astro.props;
 const base = import.meta.env.BASE_URL;
-
 const {
   title,
   author,
@@ -26,7 +25,6 @@ const {
   modDatetime,
   tags,
 } = post.data;
-
 const { Content } = await post.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
@@ -49,149 +47,141 @@ const layoutProps = {
 ---
 
 <Layout {...layoutProps}>
-  <Header />
-
-  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
-    <button
-      class="focus-outline mb-2 mt-8 flex hover:opacity-75"
-      onclick={`(() => (history.length === 1) ? window.location = '${base}' : history.back())()`}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg"
-        ><path
-          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
-        ></path>
-      </svg><span>Go back</span>
-    </button>
-  </div>
+  <Header activeNav="posts" />
   <main id="main-content">
-    <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
-    <Datetime
-      pubDatetime={pubDatetime}
-      modDatetime={modDatetime}
-      size="lg"
-      className="my-2"
-    />
-    <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
+    <a class="back-link" href={`${base}posts/`}>← Writing</a>
+
+    <header class="article-header">
+      <div class="article-kicker">Field note</div>
+      <h1 transition:name={slugifyStr(title)}>{title}</h1>
+      <p class="dek">{description}</p>
+      <div class="meta-row">
+        <Datetime pubDatetime={pubDatetime} modDatetime={modDatetime} size="lg" />
+        <span class="dot" aria-hidden="true">•</span>
+        <span>{author}</span>
+      </div>
+      {tags.length > 0 && (
+        <ul class="tag-list">
+          {tags.map(tag => <Tag tag={slugifyStr(tag)} />)}
+        </ul>
+      )}
+    </header>
+
+    <article id="article" role="article" class="prose">
       <Content />
     </article>
 
-    <ul class="my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} />)}
-    </ul>
-
-    <div
-      class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row-reverse sm:items-end sm:gap-4"
-    >
-      <button
-        id="back-to-top"
-        class="focus-outline whitespace-nowrap py-1 hover:opacity-75"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="rotate-90">
-          <path
-            d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
-          ></path>
-        </svg>
-        <span>Back to Top</span>
-      </button>
-
-      <ShareLinks />
-    </div>
+    <footer class="article-footer">
+      <div>
+        <p class="footer-label">Share this note</p>
+        <ShareLinks />
+      </div>
+      <button id="back-to-top" class="back-top">Back to top ↑</button>
+    </footer>
   </main>
   <Footer />
 </Layout>
 
 <style>
-  main {
-    @apply mx-auto w-full max-w-3xl px-4 pb-12;
+  #main-content {
+    @apply mx-auto w-full max-w-5xl px-4 pb-16;
   }
-  .post-title {
-    @apply text-2xl font-semibold text-skin-accent;
+  .back-link {
+    @apply mt-8 inline-flex rounded-lg px-2 py-1 text-sm font-medium opacity-60 transition hover:bg-skin-card hover:opacity-100 sm:mt-12;
+  }
+  .article-header {
+    @apply mx-auto max-w-3xl border-b border-skin-line pb-10 pt-8 sm:pb-12 sm:pt-12;
+  }
+  .article-kicker,
+  .footer-label {
+    @apply text-xs font-semibold uppercase tracking-[0.22em] text-skin-accent;
+  }
+  .article-header h1 {
+    @apply mt-4 text-4xl font-semibold leading-tight tracking-tight sm:text-6xl;
+  }
+  .dek {
+    @apply mt-5 max-w-2xl text-lg leading-8 opacity-65;
+  }
+  .meta-row {
+    @apply mt-6 flex flex-wrap items-center gap-3 text-sm opacity-55;
+  }
+  .dot {
+    @apply opacity-40;
+  }
+  .tag-list {
+    @apply mt-5 flex flex-wrap gap-2;
+  }
+  #article {
+    @apply mx-auto mt-12 max-w-3xl sm:mt-16;
+  }
+  .article-footer {
+    @apply mx-auto mt-16 flex max-w-3xl flex-col gap-8 border-t border-skin-line pt-8 sm:flex-row sm:items-end sm:justify-between;
+  }
+  .back-top {
+    @apply rounded-xl border border-skin-line px-4 py-2 text-sm font-medium transition hover:bg-skin-card;
   }
 </style>
 
 <script is:inline>
-  function createProgressBar() {
-    const progressContainer = document.createElement("div");
-    progressContainer.className =
-      "progress-container fixed top-0 z-10 h-1 w-full bg-skin-fill";
-
-    const progressBar = document.createElement("div");
-    progressBar.className = "progress-bar h-1 w-0 bg-skin-accent";
-    progressBar.id = "myBar";
-
-    progressContainer.appendChild(progressBar);
-    document.body.appendChild(progressContainer);
+  function ensureProgressBar() {
+    if (document.getElementById("reading-progress")) return;
+    const track = document.createElement("div");
+    track.className = "fixed left-0 top-0 z-50 h-[2px] w-full bg-transparent";
+    const bar = document.createElement("div");
+    bar.id = "reading-progress";
+    bar.className = "h-full w-0 bg-skin-accent";
+    track.appendChild(bar);
+    document.body.appendChild(track);
   }
-  createProgressBar();
 
-  function updateScrollProgress() {
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-    const height =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    if (document) {
-      const myBar = document.getElementById("myBar");
-      if (myBar) myBar.style.width = scrolled + "%";
-    }
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    const bar = document.getElementById("reading-progress");
+    if (bar) bar.style.width = `${pct}%`;
   }
-  document.addEventListener("scroll", updateScrollProgress);
 
   function addHeadingLinks() {
-    const headings = Array.from(document.querySelectorAll("h2, h3, h4, h5, h6"));
-    for (const heading of headings) {
+    document.querySelectorAll("#article h2, #article h3, #article h4").forEach(heading => {
+      if (!heading.id || heading.querySelector(".heading-link")) return;
       heading.classList.add("group");
       const link = document.createElement("a");
-      link.innerText = "#";
-      link.className = "heading-link hidden group-hover:inline-block ml-2";
-      link.href = "#" + heading.id;
-      link.ariaHidden = "true";
+      link.textContent = "#";
+      link.className = "heading-link ml-2 opacity-0 transition group-hover:opacity-50";
+      link.href = `#${heading.id}`;
+      link.setAttribute("aria-label", `Link to ${heading.textContent}`);
       heading.appendChild(link);
-    }
-  }
-  addHeadingLinks();
-
-  function attachCopyButtons() {
-    const copyButtonLabel = "Copy";
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
-
-    for (const codeBlock of codeBlocks) {
-      const wrapper = document.createElement("div");
-      wrapper.style.position = "relative";
-
-      const copyButton = document.createElement("button");
-      copyButton.className =
-        "copy-code absolute right-3 -top-3 rounded bg-skin-card px-2 py-1 text-xs leading-4 text-skin-base font-medium";
-      copyButton.innerHTML = copyButtonLabel;
-      codeBlock.setAttribute("tabindex", "0");
-      codeBlock.appendChild(copyButton);
-
-      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
-      wrapper.appendChild(codeBlock);
-
-      copyButton.addEventListener("click", async () => {
-        await copyCode(codeBlock, copyButton);
-      });
-    }
-
-    async function copyCode(block, button) {
-      const code = block.querySelector("code");
-      const text = code?.innerText;
-      await navigator.clipboard.writeText(text ?? "");
-      button.innerText = "Copied";
-      setTimeout(() => {
-        button.innerText = copyButtonLabel;
-      }, 700);
-    }
-  }
-  attachCopyButtons();
-
-  function backToTop() {
-    document.querySelector("#back-to-top")?.addEventListener("click", () => {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
     });
   }
-  backToTop();
+
+  function attachCopyButtons() {
+    document.querySelectorAll("#article pre").forEach(codeBlock => {
+      if (codeBlock.querySelector(".copy-code")) return;
+      codeBlock.style.position = "relative";
+      const button = document.createElement("button");
+      button.className = "copy-code absolute right-3 top-3 rounded-lg bg-skin-card px-2.5 py-1.5 text-xs font-medium text-skin-base";
+      button.textContent = "Copy";
+      button.addEventListener("click", async () => {
+        const code = codeBlock.querySelector("code")?.textContent ?? "";
+        await navigator.clipboard.writeText(code);
+        button.textContent = "Copied";
+        setTimeout(() => (button.textContent = "Copy"), 900);
+      });
+      codeBlock.appendChild(button);
+    });
+  }
+
+  function initArticle() {
+    ensureProgressBar();
+    updateProgress();
+    addHeadingLinks();
+    attachCopyButtons();
+    document.getElementById("back-to-top")?.addEventListener("click", () =>
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    );
+  }
+
+  initArticle();
+  document.addEventListener("scroll", updateProgress, { passive: true });
+  document.addEventListener("astro:after-swap", initArticle);
 </script>

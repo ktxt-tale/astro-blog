@@ -20,15 +20,14 @@ const { currentPage, totalPages, paginatedPosts, tag, tagName } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title={`Tag: ${tagName} | ${SITE.title}`}>
-  <Header activeNav="tags" />
+<Layout title={`Topic: ${tagName} | ${SITE.title}`}>
+  <Header activeNav="posts" />
   <Main
-    pageTitle={[`Tag:`, `${tagName}`]}
+    pageTitle={["Topic", `#${tagName}`]}
     titleTransition={tag}
-    pageDesc={`All the articles with the tag "${tagName}".`}
+    pageDesc={`${paginatedPosts.length} note${paginatedPosts.length === 1 ? "" : "s"} on ${tagName}.`}
   >
-    <h1 slot="title" transition:name={tag}>{`Tag:${tag}`}</h1>
-    <ul>
+    <ul class="border-t border-skin-line">
       {
         paginatedPosts.map(({ data, slug }) => (
           <Card href={`${base}posts/${slug}/`} frontmatter={data} />
@@ -40,9 +39,7 @@ const base = import.meta.env.BASE_URL;
   <Pagination
     {currentPage}
     {totalPages}
-    prevUrl={`${base}tags/${tag}${
-      currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""
-    }/`}
+    prevUrl={`${base}tags/${tag}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
     nextUrl={`${base}tags/${tag}/${currentPage + 1}/`}
   />
 

@@ -46,10 +46,10 @@ export default function SearchBar({ searchList }: Props) {
   }, [inputVal]);
 
   return (
-    <div className="search-shell">
-      <label className="search-box">
+    <div>
+      <label className="relative flex items-center rounded-2xl border border-skin-line bg-skin-card/40 px-4 py-1 transition focus-within:border-skin-accent">
         <span className="sr-only">Search writing</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true" className="search-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5 shrink-0 opacity-45">
           <path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
         </svg>
         <input
@@ -59,39 +59,39 @@ export default function SearchBar({ searchList }: Props) {
           onChange={e => setInputVal(e.currentTarget.value)}
           placeholder="Search ideas, tools, tags…"
           autoComplete="off"
-          className="search-input"
+          className="min-w-0 flex-1 bg-transparent px-3 py-4 text-base outline-none placeholder:opacity-40 sm:text-lg"
         />
         {inputVal && (
-          <button type="button" onClick={() => setInputVal("")} className="clear-btn" aria-label="Clear search">
+          <button type="button" onClick={() => setInputVal("")} className="rounded-lg px-2 py-1 text-xs font-medium opacity-50 hover:bg-skin-card hover:opacity-100" aria-label="Clear search">
             Clear
           </button>
         )}
       </label>
 
-      <div className="search-meta">
+      <div className="mb-3 mt-4 text-xs uppercase tracking-[0.16em] opacity-45">
         {inputVal.trim().length > 1
           ? `${results.length} ${results.length === 1 ? "result" : "results"}`
           : "Type at least 2 characters"}
       </div>
 
       {inputVal.trim().length > 1 && results.length === 0 && (
-        <div className="empty-state">
-          <p>No matching notes yet.</p>
-          <span>Try a broader keyword or browse Writing instead.</span>
+        <div className="rounded-2xl border border-dashed border-skin-line px-5 py-10 text-center">
+          <p className="font-medium">No matching notes yet.</p>
+          <span className="mt-1 block text-sm opacity-50">Try a broader keyword or browse Writing instead.</span>
         </div>
       )}
 
-      <ul className="result-list">
+      <ul>
         {results.map(({ item }) => (
-          <li key={item.slug} className="result-item">
-            <a href={`${base}posts/${item.slug}/`} className="result-link">
-              <div className="result-topline">
+          <li key={item.slug} className="border-b border-skin-line py-7 last:border-b-0">
+            <a href={`${base}posts/${item.slug}/`} className="group block focus-visible:no-underline">
+              <div className="mb-3 flex flex-wrap gap-3 text-xs uppercase tracking-[0.14em] opacity-45">
                 <span>{new Date(item.data.pubDatetime).getFullYear()}</span>
                 {item.data.tags?.slice(0, 2).map(tag => <span key={tag}>#{tag}</span>)}
               </div>
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-              <span className="result-cta">Open note →</span>
+              <h2 className="text-xl font-semibold tracking-tight transition group-hover:text-skin-accent sm:text-2xl">{item.title}</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 opacity-60 sm:text-base sm:leading-7">{item.description}</p>
+              <span className="mt-4 inline-flex text-sm font-medium text-skin-accent">Open note <span className="ml-2 transition-transform group-hover:translate-x-1">→</span></span>
             </a>
           </li>
         ))}

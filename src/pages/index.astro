@@ -3,156 +3,308 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
-import Card from "@components/Card";
-import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import { SOCIALS } from "@config";
 
-const posts = await getCollection("blog");
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
-const socialCount = SOCIALS.filter(social => social.active).length;
 const base = import.meta.env.BASE_URL;
+const posts = getSortedPosts(await getCollection("blog")).filter(({ data }) => !data.draft);
+const recentPosts = posts.slice(0, 3);
+const projects = (await getCollection("projects"))
+  .filter(({ data }) => !data.draft)
+  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.year - a.data.year);
+const featuredProjects = projects.slice(0, 4);
 ---
 
-<Layout>
+<Layout title="Product Builder Portfolio" description="A product-focused portfolio for projects, experiments, and writing.">
   <Header />
-  <main id="main-content">
-    <section id="hero">
-      <h1>Mingalaba</h1>
-      <a
-        target="_blank"
-        href={`${base}rss.xml`}
-        class="rss-link"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="rss-icon"
-          ><path
-            d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"
-          ></path><path
-            d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z"
-          ></path><circle cx="6" cy="18" r="2"></circle>
-        </svg>
-        <span class="sr-only">RSS Feed</span>
-      </a>
 
-      <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p>
-        Read the blog posts or check
-        <LinkButton
-          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p>
-      {
-        socialCount > 0 && (
-          <div class="social-wrapper">
-            <div class="social-links">Social Links:</div>
-            <Socials />
+  <main id="main-content">
+    <section class="hero-shell">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> Product builder · designer · developer</div>
+        <h1>I turn ideas into <span>useful digital products.</span></h1>
+        <p>I design, build, and refine software with a focus on clear interfaces, practical systems, and products that are pleasant to use.</p>
+        <div class="hero-actions">
+          <a class="primary-action" href={`${base}projects/`}>View projects <span>↗</span></a>
+          <a class="secondary-action" href={`${base}posts/`}>Read writing</a>
+        </div>
+      </div>
+
+      <div class="hero-panel" aria-hidden="true">
+        <div class="panel-top"><span>currently_building</span><span class="live-pill">LIVE</span></div>
+        <div class="panel-body">
+          <div class="mini-label">FOCUS</div>
+          <div class="mini-title">Product systems that stay simple as they grow.</div>
+          <div class="mini-grid">
+            <div><span>01</span><strong>Design</strong></div>
+            <div><span>02</span><strong>Build</strong></div>
+            <div><span>03</span><strong>Ship</strong></div>
+            <div><span>04</span><strong>Learn</strong></div>
           </div>
-        )
-      }
+        </div>
+      </div>
     </section>
 
-    <Hr />
+    <section class="section-shell">
+      <div class="section-heading">
+        <div><p class="section-kicker">Selected work</p><h2>Projects</h2></div>
+        <a href={`${base}projects/`}>View all <span>→</span></a>
+      </div>
 
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data, slug }) => (
-                <Card
-                  href={`${base}posts/${slug}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
+      <div class="project-grid">
+        {featuredProjects.map(({ slug, data }, index) => (
+          <a href={`${base}projects/${slug}/`} class="project-card group">
+            <div class="project-card-top">
+              <span class="project-index">0{index + 1}</span>
+              <span class="project-status">{data.status}</span>
+            </div>
+            <div class="project-main">
+              <p class="project-year">{data.year}{data.role ? ` · ${data.role}` : ""}</p>
+              <h3>{data.title}</h3>
+              <p>{data.summary}</p>
+            </div>
+            <div class="project-footer">
+              <div class="stack-list">
+                {data.stack.slice(0, 4).map(item => <span>{item}</span>)}
+              </div>
+              <span class="project-arrow">↗</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
 
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts">
-          <h2>Recent Posts</h2>
-          <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < 4 && (
-                  <Card
-                    href={`${base}posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
-            )}
-          </ul>
-        </section>
-      )
-    }
+    <section class="section-shell writing-shell">
+      <div class="section-heading">
+        <div><p class="section-kicker">Thinking in public</p><h2>Recent writing</h2></div>
+        <a href={`${base}posts/`}>All posts <span>→</span></a>
+      </div>
 
-    <div class="all-posts-btn-wrapper">
-      <LinkButton href={`${base}posts/`}>
-        All Posts
-        <svg xmlns="http://www.w3.org/2000/svg"
-          ><path
-            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-          ></path>
-        </svg>
-      </LinkButton>
-    </div>
+      <div class="writing-list">
+        {recentPosts.map(({ slug, data }) => (
+          <a href={`${base}posts/${slug}/`} class="writing-row">
+            <div>
+              <div class="writing-meta">{data.pubDatetime.toLocaleDateString("en", { year: "numeric", month: "short", day: "numeric" })}</div>
+              <h3>{data.title}</h3>
+              <p>{data.description}</p>
+            </div>
+            <span>↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section-shell about-strip">
+      <div>
+        <p class="section-kicker">About</p>
+        <h2>Building with equal attention to product thinking and implementation.</h2>
+      </div>
+      <div>
+        <p>This site is also a working system: content is managed separately from presentation, so the portfolio can evolve without locking the writing and project data into one theme.</p>
+        <a href={`${base}about/`}>More about me →</a>
+      </div>
+    </section>
   </main>
 
   <Footer />
 </Layout>
 
 <style>
-  #hero {
-    @apply pb-6 pt-8;
+  .hero-shell,
+  .section-shell {
+    @apply mx-auto w-full max-w-6xl px-4;
   }
-  #hero h1 {
-    @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
+
+  .hero-shell {
+    @apply grid gap-10 py-16 sm:grid-cols-[1.2fr_0.8fr] sm:items-end sm:py-24;
   }
-  #hero .rss-link {
-    @apply mb-6;
+
+  .hero-copy {
+    @apply max-w-3xl;
   }
-  #hero .rss-icon {
-    @apply mb-2 h-6 w-6 scale-110 fill-skin-accent sm:mb-3 sm:scale-125;
+
+  .eyebrow,
+  .section-kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-skin-accent;
   }
-  #hero p {
-    @apply my-2;
+
+  .eyebrow {
+    @apply mb-5 flex items-center gap-2;
   }
-  .social-wrapper {
-    @apply mt-4 flex flex-col sm:flex-row sm:items-center;
+
+  .status-dot {
+    @apply inline-block h-2 w-2 rounded-full bg-skin-accent;
+    box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.12);
   }
-  .social-links {
-    @apply mb-1 mr-2 whitespace-nowrap sm:mb-0;
+
+  .hero-copy h1 {
+    @apply max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-7xl;
   }
-  #featured,
-  #recent-posts {
-    @apply pb-6 pt-12;
+
+  .hero-copy h1 span {
+    @apply text-skin-accent;
   }
-  #featured h2,
-  #recent-posts h2 {
-    @apply text-2xl font-semibold tracking-wide;
+
+  .hero-copy > p {
+    @apply mt-7 max-w-2xl text-lg leading-8 opacity-65;
   }
-  .all-posts-btn-wrapper {
-    @apply my-8 text-center;
+
+  .hero-actions {
+    @apply mt-8 flex flex-wrap gap-3;
+  }
+
+  .primary-action,
+  .secondary-action {
+    @apply inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition;
+  }
+
+  .primary-action {
+    @apply bg-skin-inverted text-skin-inverted hover:-translate-y-0.5;
+  }
+
+  .secondary-action {
+    @apply border border-skin-line hover:border-skin-accent hover:text-skin-accent;
+  }
+
+  .hero-panel {
+    @apply overflow-hidden rounded-3xl border border-skin-line bg-skin-card/40;
+  }
+
+  .panel-top {
+    @apply flex items-center justify-between border-b border-skin-line px-5 py-4 font-mono text-xs opacity-70;
+  }
+
+  .live-pill {
+    @apply rounded-full bg-skin-accent px-2 py-1 text-[10px] font-bold text-white;
+  }
+
+  .panel-body {
+    @apply p-6 sm:p-7;
+  }
+
+  .mini-label {
+    @apply text-[10px] font-bold uppercase tracking-[0.18em] opacity-40;
+  }
+
+  .mini-title {
+    @apply mt-3 text-2xl font-semibold leading-tight tracking-tight;
+  }
+
+  .mini-grid {
+    @apply mt-8 grid grid-cols-2 overflow-hidden rounded-2xl border border-skin-line;
+  }
+
+  .mini-grid div {
+    @apply flex flex-col gap-1 border-b border-r border-skin-line p-4 last:border-b-0;
+  }
+
+  .mini-grid span {
+    @apply font-mono text-[10px] opacity-35;
+  }
+
+  .mini-grid strong {
+    @apply text-sm;
+  }
+
+  .section-shell {
+    @apply py-16 sm:py-20;
+  }
+
+  .section-heading {
+    @apply mb-8 flex items-end justify-between gap-5;
+  }
+
+  .section-heading h2 {
+    @apply mt-2 text-3xl font-semibold tracking-tight sm:text-4xl;
+  }
+
+  .section-heading > a {
+    @apply text-sm font-medium opacity-55 transition hover:text-skin-accent hover:opacity-100;
+  }
+
+  .project-grid {
+    @apply grid gap-4 sm:grid-cols-2;
+  }
+
+  .project-card {
+    @apply flex min-h-[310px] flex-col rounded-3xl border border-skin-line bg-skin-card/25 p-6 transition hover:-translate-y-1 hover:border-skin-accent hover:bg-skin-card/50 sm:p-7;
+  }
+
+  .project-card-top,
+  .project-footer {
+    @apply flex items-center justify-between;
+  }
+
+  .project-index,
+  .project-status,
+  .project-year {
+    @apply font-mono text-xs uppercase tracking-[0.12em] opacity-45;
+  }
+
+  .project-main {
+    @apply my-auto py-10;
+  }
+
+  .project-main h3 {
+    @apply mt-3 text-2xl font-semibold tracking-tight transition group-hover:text-skin-accent;
+  }
+
+  .project-main > p:last-child {
+    @apply mt-3 max-w-xl leading-7 opacity-60;
+  }
+
+  .stack-list {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .stack-list span {
+    @apply rounded-full border border-skin-line px-2.5 py-1 text-[11px] opacity-60;
+  }
+
+  .project-arrow {
+    @apply text-xl opacity-40 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-skin-accent group-hover:opacity-100;
+  }
+
+  .writing-shell {
+    @apply border-t border-skin-line;
+  }
+
+  .writing-list {
+    @apply divide-y divide-skin-line border-y border-skin-line;
+  }
+
+  .writing-row {
+    @apply flex items-start justify-between gap-8 py-7 transition hover:text-skin-accent;
+  }
+
+  .writing-row h3 {
+    @apply mt-2 text-xl font-semibold tracking-tight;
+  }
+
+  .writing-row p {
+    @apply mt-2 max-w-2xl leading-7 text-skin-base opacity-55;
+  }
+
+  .writing-meta {
+    @apply font-mono text-xs uppercase tracking-[0.1em] text-skin-base opacity-40;
+  }
+
+  .writing-row > span {
+    @apply mt-4 text-xl opacity-35;
+  }
+
+  .about-strip {
+    @apply grid gap-10 border-t border-skin-line sm:grid-cols-2;
+  }
+
+  .about-strip h2 {
+    @apply mt-3 max-w-xl text-3xl font-semibold leading-tight tracking-tight;
+  }
+
+  .about-strip > div:last-child p {
+    @apply max-w-xl leading-8 opacity-65;
+  }
+
+  .about-strip > div:last-child a {
+    @apply mt-5 inline-block text-sm font-semibold text-skin-accent;
   }
 </style>

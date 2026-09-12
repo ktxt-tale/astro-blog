@@ -1,6 +1,5 @@
 import Fuse from "fuse.js";
-import { useEffect, useRef, useState, useMemo } from "react";
-import Card from "@components/Card";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { CollectionEntry } from "astro:content";
 
 export type SearchItem = {
@@ -14,99 +13,89 @@ interface Props {
   searchList: SearchItem[];
 }
 
-interface SearchResult {
-  item: SearchItem;
-  refIndex: number;
-}
-
 export default function SearchBar({ searchList }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputVal, setInputVal] = useState("");
-  const [searchResults, setSearchResults] = useState<SearchResult[] | null>(null);
   const base = import.meta.env.BASE_URL;
-
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setInputVal(e.currentTarget.value);
-  };
 
   const fuse = useMemo(
     () =>
       new Fuse(searchList, {
-        keys: ["title", "description"],
+        keys: ["title", "description", "data.tags"],
         includeMatches: true,
         minMatchCharLength: 2,
-        threshold: 0.5,
+        threshold: 0.38,
       }),
     [searchList]
   );
 
-  useEffect(() => {
-    const searchUrl = new URLSearchParams(window.location.search);
-    const searchStr = searchUrl.get("q");
-    if (searchStr) setInputVal(searchStr);
+  const results = inputVal.trim().length > 1 ? fuse.search(inputVal.trim()) : [];
 
-    setTimeout(function () {
-      inputRef.current!.selectionStart = inputRef.current!.selectionEnd =
-        searchStr?.length || 0;
-    }, 50);
+  useEffect(() => {
+    const searchStr = new URLSearchParams(window.location.search).get("q") ?? "";
+    setInputVal(searchStr);
+    requestAnimationFrame(() => inputRef.current?.focus());
   }, []);
 
   useEffect(() => {
-    const inputResult = inputVal.length > 1 ? fuse.search(inputVal) : [];
-    setSearchResults(inputResult);
-
-    if (inputVal.length > 0) {
-      const searchParams = new URLSearchParams(window.location.search);
-      searchParams.set("q", inputVal);
-      const newRelativePathQuery =
-        window.location.pathname + "?" + searchParams.toString();
-      history.replaceState(history.state, "", newRelativePathQuery);
-    } else {
-      history.replaceState(history.state, "", window.location.pathname);
-    }
-  }, [inputVal, fuse]);
+    const params = new URLSearchParams(window.location.search);
+    if (inputVal.trim()) params.set("q", inputVal.trim());
+    else params.delete("q");
+    const query = params.toString();
+    history.replaceState(history.state, "", window.location.pathname + (query ? `?${query}` : ""));
+  }, [inputVal]);
 
   return (
-    <>
-      <label className="relative block">
-        <span className="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75">
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path>
-          </svg>
-          <span className="sr-only">Search</span>
-        </span>
+    <div className="search-shell">
+      <label className="search-box">
+        <span className="sr-only">Search writing</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="search-icon">
+          <path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
         <input
-          className="block w-full rounded border border-skin-fill border-opacity-40 bg-skin-fill py-3 pl-10 pr-3 placeholder:italic placeholder:text-opacity-75 focus:border-skin-accent focus:outline-none"
-          placeholder="Search for anything..."
-          type="text"
-          name="search"
-          value={inputVal}
-          onChange={handleChange}
-          autoComplete="off"
           ref={inputRef}
+          type="search"
+          value={inputVal}
+          onChange={e => setInputVal(e.currentTarget.value)}
+          placeholder="Search ideas, tools, tags…"
+          autoComplete="off"
+          className="search-input"
         />
+        {inputVal && (
+          <button type="button" onClick={() => setInputVal("")} className="clear-btn" aria-label="Clear search">
+            Clear
+          </button>
+        )}
       </label>
 
-      {inputVal.length > 1 && (
-        <div className="mt-8">
-          Found {searchResults?.length}
-          {searchResults?.length && searchResults?.length === 1
-            ? " result"
-            : " results"}{" "}
-          for '{inputVal}'
+      <div className="search-meta">
+        {inputVal.trim().length > 1
+          ? `${results.length} ${results.length === 1 ? "result" : "results"}`
+          : "Type at least 2 characters"}
+      </div>
+
+      {inputVal.trim().length > 1 && results.length === 0 && (
+        <div className="empty-state">
+          <p>No matching notes yet.</p>
+          <span>Try a broader keyword or browse Writing instead.</span>
         </div>
       )}
 
-      <ul>
-        {searchResults &&
-          searchResults.map(({ item, refIndex }) => (
-            <Card
-              href={`${base}posts/${item.slug}/`}
-              frontmatter={item.data}
-              key={`${refIndex}-${item.slug}`}
-            />
-          ))}
+      <ul className="result-list">
+        {results.map(({ item }) => (
+          <li key={item.slug} className="result-item">
+            <a href={`${base}posts/${item.slug}/`} className="result-link">
+              <div className="result-topline">
+                <span>{new Date(item.data.pubDatetime).getFullYear()}</span>
+                {item.data.tags?.slice(0, 2).map(tag => <span key={tag}>#{tag}</span>)}
+              </div>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <span className="result-cta">Open note →</span>
+            </a>
+          </li>
+        ))}
       </ul>
-    </>
+    </div>
   );
 }

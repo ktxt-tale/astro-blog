@@ -23,4 +23,21 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const projects = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    year: z.number(),
+    status: z.enum(["building", "live", "paused", "archived"]).default("building"),
+    role: z.string().optional(),
+    stack: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
+    cover: z.string().optional(),
+    demoUrl: z.string().url().optional().or(z.literal("")),
+    repoUrl: z.string().url().optional().or(z.literal("")),
+  }),
+});
+
+export const collections = { blog, projects };

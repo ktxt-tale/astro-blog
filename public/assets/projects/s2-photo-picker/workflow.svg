@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">S2 Photo Picker workflow</title>
+  <desc id="desc">Illustration of the S2 Photo Picker workflow from Google Drive to customer selection and photo filtering.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff5b9e"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="36" fill="url(#bg)"/>
+  <text x="72" y="92" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#111827">Workflow của S2 Photo Picker</text>
+  <text x="72" y="126" font-family="Inter, Arial, sans-serif" font-size="16" fill="#64748b">Từ thư mục Google Drive đến bộ ảnh sẵn sàng cho hậu kỳ</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <g transform="translate(72 210)">
+      <rect width="230" height="260" rx="28" fill="#fff" stroke="#dbe3f2"/>
+      <circle cx="42" cy="42" r="20" fill="#eef2ff"/>
+      <text x="35" y="49" font-size="18" font-weight="800" fill="#7c3aed">1</text>
+      <text x="28" y="96" font-size="22" font-weight="800" fill="#111827">Google Drive</text>
+      <text x="28" y="126" font-size="15" fill="#64748b">Thợ ảnh chia sẻ thư mục ảnh</text>
+      <rect x="28" y="158" width="174" height="62" rx="14" fill="#f8fafc" stroke="#dbe3f2"/>
+      <text x="42" y="184" font-size="12" fill="#64748b">drive.google.com</text>
+      <text x="42" y="204" font-size="12" font-weight="700" fill="#111827">/folders/...</text>
+    </g>
+
+    <path d="M318 340 H374" stroke="#a5b4fc" stroke-width="4" stroke-linecap="round"/>
+    <path d="M364 330 L376 340 L364 350" fill="none" stroke="#a5b4fc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(390 210)">
+      <rect width="230" height="260" rx="28" fill="#fff" stroke="#dbe3f2"/>
+      <circle cx="42" cy="42" r="20" fill="#fce7f3"/>
+      <text x="35" y="49" font-size="18" font-weight="800" fill="#db2777">2</text>
+      <text x="28" y="96" font-size="22" font-weight="800" fill="#111827">Trang chọn ảnh</text>
+      <text x="28" y="126" font-size="15" fill="#64748b">Khách mở link và thả tim</text>
+      <g transform="translate(28 154)">
+        <rect width="80" height="76" rx="14" fill="#e2e8f0"/>
+        <circle cx="64" cy="58" r="12" fill="#ff5b9e"/>
+        <text x="59" y="63" font-size="13" fill="#fff">♥</text>
+        <rect x="94" width="80" height="76" rx="14" fill="#cbd5e1"/>
+        <circle cx="158" cy="58" r="12" fill="#ff5b9e"/>
+        <text x="153" y="63" font-size="13" fill="#fff">♥</text>
+      </g>
+    </g>
+
+    <path d="M636 340 H692" stroke="#a5b4fc" stroke-width="4" stroke-linecap="round"/>
+    <path d="M682 330 L694 340 L682 350" fill="none" stroke="#a5b4fc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(708 210)">
+      <rect width="230" height="260" rx="28" fill="#fff" stroke="#dbe3f2"/>
+      <circle cx="42" cy="42" r="20" fill="#ecfccb"/>
+      <text x="35" y="49" font-size="18" font-weight="800" fill="#4d7c0f">3</text>
+      <text x="28" y="96" font-size="22" font-weight="800" fill="#111827">Lấy kết quả</text>
+      <text x="28" y="126" font-size="15" fill="#64748b">Chép danh sách tên ảnh đã chọn</text>
+      <rect x="28" y="158" width="174" height="72" rx="14" fill="#f8fafc" stroke="#dbe3f2"/>
+      <text x="42" y="184" font-size="12" font-family="ui-monospace, monospace" fill="#475569">IMG_1024.JPG</text>
+      <text x="42" y="202" font-size="12" font-family="ui-monospace, monospace" fill="#475569">IMG_1088.JPG</text>
+      <text x="42" y="220" font-size="12" font-family="ui-monospace, monospace" fill="#475569">IMG_1120.JPG</text>
+    </g>
+
+    <path d="M954 340 H1010" stroke="#a5b4fc" stroke-width="4" stroke-linecap="round"/>
+    <path d="M1000 330 L1012 340 L1000 350" fill="none" stroke="#a5b4fc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(1028 210)">
+      <rect width="100" height="260" rx="28" fill="url(#accent)"/>
+      <circle cx="50" cy="42" r="20" fill="#fff" opacity=".18"/>
+      <text x="43" y="49" font-size="18" font-weight="800" fill="#fff">4</text>
+      <text x="50" y="103" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">Lọc</text>
+      <text x="50" y="127" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">ảnh</text>
+      <path d="M31 166 h38 M31 190 h38 M31 214 h26" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+    </g>
+  </g>
+
+  <g transform="translate(72 536)" font-family="Inter, Arial, sans-serif">
+    <rect width="1056" height="112" rx="24" fill="#111827"/>
+    <text x="30" y="42" font-size="13" font-weight="800" fill="#a5b4fc" letter-spacing="1.4">PRODUCT IDEA</text>
+    <text x="30" y="76" font-size="20" font-weight="700" fill="#fff">S2 không thay thế Google Drive hay phần mềm hậu kỳ — nó làm gọn đoạn workflow nằm giữa hai công cụ đó.</text>
+  </g>
+</svg>

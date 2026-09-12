@@ -31,6 +31,8 @@ content:
       - { name: cover, label: Cover image, type: string }
       - { name: demoUrl, label: Demo URL, type: string }
       - { name: repoUrl, label: Repository URL, type: string }
+      - { name: ecosystem, label: Ecosystem, type: string }
+      - { name: relatedProjects, label: Related project slugs, type: string, list: true }
       - name: body
         label: Case study
         type: rich-text

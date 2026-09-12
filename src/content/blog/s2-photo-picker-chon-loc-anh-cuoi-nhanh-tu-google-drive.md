@@ -2,8 +2,10 @@
 title: "S2 Photo Picker: Chọn và lọc ảnh cưới nhanh từ Google Drive"
 author: KTXT
 pubDatetime: 2026-09-12T08:00:00+07:00
+modDatetime: 2026-09-12T08:30:00+07:00
 featured: true
 draft: false
+ogImage: /astro-blog/assets/projects/s2-photo-picker/cover.svg
 tags:
   - product
   - photography
@@ -11,6 +13,8 @@ tags:
   - vietnam
 description: "S2 Photo Picker là công cụ web giúp photographer tạo trang cho khách chọn ảnh trực tiếp từ Google Drive, nhận kết quả và lọc ảnh cho công đoạn tiếp theo mà không cần cài đặt phần mềm."
 ---
+
+![S2 Photo Picker — chọn và lọc ảnh nhanh từ Google Drive](/astro-blog/assets/projects/s2-photo-picker/cover.svg)
 
 Có một công đoạn khá nhỏ trong quy trình làm ảnh nhưng lại dễ trở thành việc mất thời gian cho cả photographer lẫn khách hàng: **chọn ảnh sau buổi chụp**.
 
@@ -29,6 +33,8 @@ S2 Photo Picker là một bộ công cụ chạy trực tiếp trên trình duy�
 
 Điều đó làm cho sản phẩm khá phù hợp với những workflow vốn đã dùng Google Drive để giao ảnh proof cho khách.
 
+![Workflow của S2 Photo Picker](/astro-blog/assets/projects/s2-photo-picker/workflow.svg)
+
 ## Từ một thư mục Google Drive đến trang chọn ảnh
 
 Quy trình sử dụng khá ngắn.
@@ -38,6 +44,8 @@ Quy trình sử dụng khá ngắn.
 Sau đó chỉ cần gửi đường dẫn album cho khách hàng.
 
 Thay vì phải ghi tên file vào tin nhắn hoặc spreadsheet, khách có thể xem ảnh và **thả tim những tấm muốn chọn** ngay trên giao diện web.
+
+![Minh họa giao diện chọn ảnh trên S2 Photo Picker](https://s2.io.vn/about/images/iphone-app-470.webp)
 
 Khi khách hoàn tất, photographer lấy lại danh sách kết quả để dùng cho bước tiếp theo.
 
@@ -56,6 +64,8 @@ Workflow có thể hiểu đơn giản như sau:
 5. Chép hoặc chuyển chúng sang thư mục đích.
 
 Nhờ vậy, kết quả chọn ảnh của khách không chỉ nằm ở một danh sách để tham khảo mà có thể đi tiếp ngay vào workflow hậu kỳ.
+
+![Nút lấy kết quả ảnh khách đã chọn trên S2 Photo Picker](https://s2.io.vn/about/images/copy-result-button.png)
 
 Công cụ lọc file này hiện được S2 khuyến nghị sử dụng trên **Chrome hoặc Edge trên máy tính**.
 

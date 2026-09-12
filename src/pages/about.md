@@ -9,7 +9,7 @@ default and additional color schemes can also be configured.
 
 This theme is self-documented  which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
 
-![coding dev illustration](../assets/dev.svg)
+![coding dev illustration](/astro-blog/assets/dev.svg)
 
 ## Tech Stack
 

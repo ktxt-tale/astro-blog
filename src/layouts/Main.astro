@@ -19,30 +19,36 @@ const { props } = Astro;
 
 <Breadcrumbs />
 <main id="main-content">
-  {
-    "titleTransition" in props ? (
-      <h1>
-        {props.pageTitle[0]}
-        <span transition:name={props.titleTransition}>
-          {props.pageTitle[1]}
-        </span>
-      </h1>
-    ) : (
-      <h1>{props.pageTitle}</h1>
-    )
-  }
-  <p>{props.pageDesc}</p>
+  <header class="page-heading">
+    <span class="eyebrow">Index</span>
+    {
+      "titleTransition" in props ? (
+        <h1>
+          {props.pageTitle[0]} <span transition:name={props.titleTransition}>{props.pageTitle[1]}</span>
+        </h1>
+      ) : (
+        <h1>{props.pageTitle}</h1>
+      )
+    }
+    {props.pageDesc && <p>{props.pageDesc}</p>}
+  </header>
   <slot />
 </main>
 
 <style>
   #main-content {
-    @apply mx-auto w-full max-w-3xl px-4 pb-4;
+    @apply mx-auto w-full max-w-5xl px-4 pb-16;
   }
-  #main-content h1 {
-    @apply text-2xl font-semibold sm:text-3xl;
+  .page-heading {
+    @apply mb-10 border-b border-skin-line py-8 sm:mb-12 sm:py-12;
   }
-  #main-content p {
-    @apply mb-6 mt-2 italic;
+  .eyebrow {
+    @apply mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-skin-accent;
+  }
+  .page-heading h1 {
+    @apply max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl;
+  }
+  .page-heading p {
+    @apply mt-4 max-w-2xl text-base leading-7 opacity-65 sm:text-lg;
   }
 </style>

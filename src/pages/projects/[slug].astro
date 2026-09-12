@@ -15,8 +15,24 @@ interface Props {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
-const { title, summary, year, status, role, stack, cover, demoUrl, repoUrl } = project.data;
+const {
+  title,
+  summary,
+  year,
+  status,
+  role,
+  stack,
+  cover,
+  demoUrl,
+  repoUrl,
+  ecosystem,
+  relatedProjects,
+} = project.data;
 const base = import.meta.env.BASE_URL;
+const allProjects = (await getCollection("projects")).filter(({ data }) => !data.draft);
+const related = relatedProjects
+  .map(slug => allProjects.find(item => item.slug === slug))
+  .filter((item): item is CollectionEntry<"projects"> => Boolean(item));
 ---
 
 <Layout title={title} description={summary}>
@@ -26,6 +42,11 @@ const base = import.meta.env.BASE_URL;
 
     <div class="mt-8 grid gap-10 border-b border-skin-line pb-12 sm:grid-cols-[1fr_280px] sm:pb-16">
       <div>
+        {ecosystem && (
+          <div class="mb-4 inline-flex rounded-full border border-skin-line px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-skin-accent">
+            {ecosystem} ecosystem
+          </div>
+        )}
         <div class="mb-4 flex gap-3 text-xs uppercase tracking-[0.16em] opacity-55">
           <span>{year}</span><span>•</span><span>{status}</span>
         </div>
@@ -51,6 +72,37 @@ const base = import.meta.env.BASE_URL;
     <article class="prose mx-auto mt-12 max-w-3xl sm:mt-16">
       <Content />
     </article>
+
+    {related.length > 0 && (
+      <section class="mx-auto mt-16 max-w-3xl border-t border-skin-line pt-10 sm:mt-20">
+        <div class="mb-6 flex items-end justify-between gap-5">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-skin-accent">Related products</p>
+            <h2 class="mt-2 text-2xl font-semibold tracking-tight">{ecosystem ? `${ecosystem} ecosystem` : "Keep exploring"}</h2>
+          </div>
+          <a href={`${base}projects/`} class="text-sm opacity-55 hover:text-skin-accent hover:opacity-100">All projects →</a>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          {related.map(({ slug, data }) => (
+            <a href={`${base}projects/${slug}/`} class="group overflow-hidden rounded-2xl border border-skin-line bg-skin-card/25 transition hover:-translate-y-0.5 hover:border-skin-accent">
+              {data.cover && (
+                <div class="aspect-[16/9] overflow-hidden border-b border-skin-line bg-skin-card">
+                  <img src={data.cover} alt="" class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]" />
+                </div>
+              )}
+              <div class="p-5">
+                <div class="mb-2 flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.12em] opacity-45">
+                  <span>{data.status}</span><span>{data.year}</span>
+                </div>
+                <h3 class="text-lg font-semibold tracking-tight group-hover:text-skin-accent">{data.title}</h3>
+                <p class="mt-2 text-sm leading-6 opacity-60">{data.summary}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
   </main>
   <Footer />
 </Layout>

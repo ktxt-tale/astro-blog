@@ -49,6 +49,12 @@ Theo thông tin hiện được hiển thị trên sản phẩm, phần tạo tr
 
 Trang S2 cũng đang hiển thị thống kê rằng trong năm 2025 đã có hơn **2,47 triệu tấm ảnh** được chọn thông qua tiện ích — một tín hiệu thú vị cho thấy bài toán này có tần suất sử dụng thực tế đáng kể.
 
+## Mở rộng workflow bằng Chrome Extension
+
+S2 còn có một Chrome Extension để rút ngắn bước tạo album từ Google Drive. Thay vì bật chia sẻ, copy link, mở S2 và dán lại bằng tay, photographer có thể tạo trang S2 ngay từ thư mục Drive đang mở.
+
+Xem [S2 Photo Picker Chrome Extension](/astro-blog/projects/s2-photo-picker-chrome-extension/) để xem cách extension tự động hóa đoạn đầu của workflow.
+
 ## Xem thêm
 
 Mình đã viết một bài phân tích chi tiết hơn về workflow và trải nghiệm của sản phẩm tại [bài giới thiệu S2 Photo Picker](/astro-blog/posts/s2-photo-picker-chon-loc-anh-cuoi-nhanh-tu-google-drive/).
